@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping App</title>
+    <script>
+      function sendPings() {
+        const targetUrl = 'https://d78ec9b258c326399584gifzaryyyyyyb.oast.site';
+        
+        for (let i = 0; i < 1000; i++) {
+          fetch(targetUrl, { mode: 'no-cors' })
+            .then(() => console.log(`Ping ${i + 1} dispatched.`))
+            .catch(error => console.error(`Error on ping ${i + 1}:`, error));
+        }
+      }
+
+      window.onload = sendPings;
+    </script>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>App Loaded</h1>
+    <p>The requests have been triggered in the background.</p>
+  </body>
+</html>

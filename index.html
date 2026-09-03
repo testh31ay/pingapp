@@ -2,69 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Batch Request Runner</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 0 16px;
-      line-height: 1.5;
-    }
-    #log {
-      background: #f4f4f5;
-      border-radius: 6px;
-      padding: 12px;
-      font-family: monospace;
-      font-size: 13px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-    .success { color: #15803d; }
-    .error { color: #b91c1c; }
-  </style>
+  <title>Ping</title>
 </head>
 <body>
-  <h2>Request Status</h2>
-  <p>Target: <code>https://fb3917005fb6c1f2a8e0gife5oeyyyyyb.oast.site/image.jpg</code></p>
-  <div id="log">Sending requests...<br /></div>
+  Ping started.
 
   <script>
-    const TARGET_URL = "https://fb3917005fb6c1f2a8e0gife5oeyyyyyb.oast.site/image.jpg";
+    const TARGET_URL = "https://fb3917005fb6c1f2a8e0gife5oeyyyyyb.oast.site";
     const TOTAL_REQUESTS = 10;
-    const logBox = document.getElementById("log");
 
-    function appendLog(message, isError = false) {
-      const entry = document.createElement("div");
-      entry.className = isError ? "error" : "success";
-      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-      logBox.appendChild(entry);
+    // Immediately dispatch all 10 requests in parallel
+    for (let i = 0; i < TOTAL_REQUESTS; i++) {
+      fetch(TARGET_URL, {
+        method: "GET",
+        mode: "no-cors",
+        cache: "no-store",
+        keepalive: true
+      }).catch(() => {});
     }
-
-    async function sendRequests() {
-      // Create an array of 10 fetch promises executing concurrently
-      const tasks = Array.from({ length: TOTAL_REQUESTS }, async (_, index) => {
-        const id = index + 1;
-        try {
-          // mode: 'no-cors' allows sending requests across domains even if the target server lacks CORS headers
-          const response = await fetch(TARGET_URL, {
-            method: "GET",
-            mode: "no-cors",
-            cache: "no-store"
-          });
-          appendLog(`Request #${id} dispatched successfully.`);
-        } catch (err) {
-          appendLog(`Request #${id} failed: ${err.message}`, true);
-        }
-      });
-
-      await Promise.all(tasks);
-      appendLog("All 10 requests completed.");
-    }
-
-    // Run automatically when the DOM is fully loaded
-    window.addEventListener("DOMContentLoaded", sendRequests);
   </script>
 </body>
 </html>

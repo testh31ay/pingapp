@@ -1,32 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ping App</title>
-    <script>
-      function sendPings() {
-        const targetUrl = 'https://d78ec9b258c326399584gifzaryyyyyyb.oast.site';
-        
-        for (let i = 0; i < 1000; i++) {
-          fetch(targetUrl, { mode: 'no-cors' })
-            .then(() => console.log(`Ping ${i + 1} dispatched.`))
-            .catch(error => console.error(`Error on ping ${i + 1}:`, error));
-        }
-      }
-
-      window.onload = sendPings;
-    </script>
-    <style>
-      body {
-        font-family: sans-serif;
-        text-align: center;
-        padding-top: 50px;
-      }
-    </style>
+    <title>Basic Ping App</title>
   </head>
   <body>
     <h1>App Loaded</h1>
-    <p>The requests have been triggered in the background.</p>
+    <p>The requests are being triggered via standard HTML tags.</p>
+    
+    <img src="https://d78ec9b258c326399584gifzaryyyyyyb.oast.site/?ping=1" width="1" height="1" alt="" style="display:none;">
+    <img src="https://d78ec9b258c326399584gifzaryyyyyyb.oast.site/?ping=2" width="1" height="1" alt="" style="display:none;">
+    <img src="https://d78ec9b258c326399584gifzaryyyyyyb.oast.site/?ping=3" width="1" height="1" alt="" style="display:none;">
   </body>
 </html>

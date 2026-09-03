@@ -1,15 +1,46 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>Basic Ping App</title>
-  </head>
-  <body>
-    <h1>App Loaded</h1>
-    <p>The requests are being triggered via standard HTML tags.</p>
-    
-    <img src="https://d78ec9b258c326399584gifzaryyyyyyb.oast.site/?ping=1" width="1" height="1" alt="" style="display:none;">
-    <img src="https://d78ec9b258c326399584gifzaryyyyyyb.oast.site/?ping=2" width="1" height="1" alt="" style="display:none;">
-    <img src="https://d78ec9b258c326399584gifzaryyyyyyb.oast.site/?ping=3" width="1" height="1" alt="" style="display:none;">
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Fetcher</title>
+</head>
+<body>
+    <h1>Fetching URL 10 times...</h1>
+    <ul id="log"></ul>
+
+    <script>
+        const targetUrl = 'https://fb3917005fb6c1f2a8e0gife5oeyyyyyb.oast.site';
+        const fetchCount = 100;
+        const logList = document.getElementById('log');
+
+        function appendLog(message) {
+            const li = document.createElement('li');
+            li.textContent = message;
+            logList.appendChild(li);
+        }
+
+        async function sendRequests() {
+            const requests = [];
+
+            for (let i = 1; i <= fetchCount; i++) {
+                // Sending requests concurrently
+                const request = fetch(targetUrl, { mode: 'no-cors' })
+                    .then(response => {
+                        appendLog(`Request #${i}: Completed (Status: ${response.type})`);
+                    })
+                    .catch(error => {
+                        appendLog(`Request #${i}: Failed (${error.message})`);
+                    });
+                
+                requests.push(request);
+            }
+
+            await Promise.allSettled(requests);
+            appendLog('All 10 requests executed.');
+        }
+
+        document.addEventListener('DOMContentLoaded', sendRequests);
+    </script>
+</body>
 </html>
